@@ -31,10 +31,24 @@ class SecondViewController: UIViewController {
         return view
     }()
     
-    private lazy var viewForButton: UIView = {
-       let view = UIView()
+    private lazy var viewForButton: UIStackView = {
+       let view = UIStackView()
         view.backgroundColor = .white
+        view.axis = .vertical
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var redView: UIView = {
+        let view = UIView()
         
+        NSLayoutConstraint.activate([
+            view.leadingAnchor.constraint(equalTo: viewForButton.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: viewForButton.trailingAnchor),
+            view.heightAnchor.constraint(equalToConstant: 72)
+        ])
+        
+        view.backgroundColor = .red
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -69,8 +83,8 @@ class SecondViewController: UIViewController {
         view.addSubview(cameraImageView)
         view.addSubview(tempView)
         view.addSubview(viewForButton)
-        let cButton = createButton()
-        viewForButton.addSubview(cButton)
+        
+        viewForButton.sub
         
         title = "Виртуальный домофон"
         
@@ -97,8 +111,6 @@ class SecondViewController: UIViewController {
             viewForButton.topAnchor.constraint(equalTo: tempView.bottomAnchor, constant: 16),
             viewForButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -16),
             
-            cButton.leadingAnchor.constraint(equalTo: viewForButton.leadingAnchor, constant: 16),
-            cButton.topAnchor.constraint(equalTo: viewForButton.topAnchor, constant: 16)
         ])
     }
 
