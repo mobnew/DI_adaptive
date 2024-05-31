@@ -35,6 +35,14 @@ class ViewController: UIViewController {
 
     private func setupViews() {
         view.backgroundColor = .systemBackground
+        title = "Ваши ключи"
+       
+        let myButton = UIButton(type: .system)
+        myButton.setImage(UIImage(systemName: "person.fill"), for: .normal)
+        myButton.setTitle(" - Профиль", for: .normal)
+        myButton.sizeToFit()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: myButton)
+        
         
         view.addSubview(nextButton)
         

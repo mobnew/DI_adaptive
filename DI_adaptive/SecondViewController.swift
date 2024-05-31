@@ -29,7 +29,6 @@ class SecondViewController: UIViewController {
     ///тут было лень рисовать вью для статусов и номеров квартир
     private lazy var tempView: UIView = {
       let view = UIView()
-        
         view.backgroundColor = .systemGray
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -57,6 +56,21 @@ class SecondViewController: UIViewController {
 
         setupViews()
     }
+   
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        for i in 0...10 {
+            if let button = viewForButton.viewWithTag(i) as? UIButton {
+                print("gggg \(i) \(button.frame.size.width) \(button.bounds.size.width)")
+                if button.frame.size.width > 40 {
+                    button.applyGradient(colours: [.gray, .white], cornerRadius: button.frame.width / 2)
+                }
+            }
+        }
+    }
+    
     
     /// Горизонтальный StackView в котором распологаются по 3 кнопки
     private func createSmallStackView(line: Int) -> UIStackView {
@@ -103,6 +117,7 @@ class SecondViewController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.sizeToFit()
         button.tag = digit
+        if digit == 0 { button.tag = 10 }
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
         NSLayoutConstraint.activate([
             button.heightAnchor.constraint(equalToConstant: view.frame.size.width / 4.5),
@@ -182,4 +197,20 @@ class SecondViewController: UIViewController {
         ])
     }
 
+}
+
+
+extension UIView {
+    func applyGradient(colours: [UIColor], cornerRadius: CGFloat?)  {
+        let gradient: CAGradientLayer = CAGradientLayer()
+        if let cornerRadius = cornerRadius {
+            gradient.cornerRadius = cornerRadius
+        }
+        gradient.type = .radial
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.5)
+        gradient.endPoint = CGPoint(x: 0, y: 1.0)
+        gradient.colors = colours.map { $0.cgColor }
+        gradient.frame = self.bounds
+        self.layer.insertSublayer(gradient, at: 0)
+    }
 }
