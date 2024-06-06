@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import AVFoundation
 
 class SecondViewController: UIViewController {
-    
+    var audioPlayer: AVAudioPlayer?
     
     ///вью для подложки, чтобы небыло стыков
     private lazy var backgroundView: UIImageView = {
@@ -65,7 +66,7 @@ class SecondViewController: UIViewController {
             if let button = viewForButton.viewWithTag(i) as? UIButton {
                 print("gggg \(i) \(button.frame.size.width) \(button.bounds.size.width)")
                 if button.frame.size.width > 40 {
-                    button.applyGradient(colours: [.gray, .white], cornerRadius: button.frame.width / 2)
+                    button.applyGradient(colours: [.white, .gray], cornerRadius: button.frame.width / 2)
                 }
             }
         }
@@ -150,6 +151,19 @@ class SecondViewController: UIViewController {
     }
     
     @objc private func tapNumButton(_ sender: UIButton) {
+        playPik()
+        vibrate()
+        
+        ///добавляем анимацию нажатия
+        let newColors = [UIColor.gray, UIColor.black]
+        sender.updateGradientColors(colours: newColors, duration: 0.3)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            let backColors = [UIColor.white, UIColor.gray]
+            sender.updateGradientColors(colours: backColors, duration: 1.0)
+        }
+        
+        
         print("tap \(sender.tag) button")
     }
 
@@ -160,6 +174,24 @@ class SecondViewController: UIViewController {
     @objc private func tapClearButton() {
         print(#function)
     }
+    
+    /// добавляем немного звука
+    private func playPik() {
+        guard let url = Bundle.main.url(forResource: "pik", withExtension: "mp3") else { return }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.play()
+        } catch let error {
+            print("Error playing sound: \(error.localizedDescription)")
+        }
+    }
+    
+    ///добавляем вибраций
+    private func vibrate() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+        }
     
     /// Настройка и привязка views
     private func setupViews() {
@@ -201,7 +233,9 @@ class SecondViewController: UIViewController {
 
 
 extension UIView {
+    
     func applyGradient(colours: [UIColor], cornerRadius: CGFloat?)  {
+        print(#function)
         let gradient: CAGradientLayer = CAGradientLayer()
         if let cornerRadius = cornerRadius {
             gradient.cornerRadius = cornerRadius
@@ -213,4 +247,14 @@ extension UIView {
         gradient.frame = self.bounds
         self.layer.insertSublayer(gradient, at: 0)
     }
+    
+    func updateGradientColors(colours: [UIColor], duration: TimeInterval) {
+            guard let gradientLayer = self.layer.sublayers?.compactMap({ $0 as? CAGradientLayer }).first else { return }
+            let colorChangeAnimation = CABasicAnimation(keyPath: "colors")
+            colorChangeAnimation.duration = duration
+            colorChangeAnimation.toValue = colours.map { $0.cgColor }
+            colorChangeAnimation.isRemovedOnCompletion = false
+            colorChangeAnimation.fillMode = .forwards
+            gradientLayer.add(colorChangeAnimation, forKey: "colorChange")
+        }
 }

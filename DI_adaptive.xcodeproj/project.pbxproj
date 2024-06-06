@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9403FBD32C122F4900300A4E /* pik.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9403FBD22C122F4900300A4E /* pik.mp3 */; };
 		9C4308BA2C04729600E5E681 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4308B92C04729600E5E681 /* AppDelegate.swift */; };
 		9C4308BC2C04729600E5E681 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4308BB2C04729600E5E681 /* SceneDelegate.swift */; };
 		9C4308BE2C04729600E5E681 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4308BD2C04729600E5E681 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9403FBD22C122F4900300A4E /* pik.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pik.mp3; sourceTree = "<group>"; };
 		9C4308B62C04729600E5E681 /* DI_adaptive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DI_adaptive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C4308B92C04729600E5E681 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C4308BB2C04729600E5E681 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				9C4308C22C04729700E5E681 /* Assets.xcassets */,
 				9C4308C42C04729700E5E681 /* LaunchScreen.storyboard */,
 				9C4308C72C04729700E5E681 /* Info.plist */,
+				9403FBD22C122F4900300A4E /* pik.mp3 */,
 			);
 			path = DI_adaptive;
 			sourceTree = "<group>";
@@ -129,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C4308C32C04729700E5E681 /* Assets.xcassets in Resources */,
+				9403FBD32C122F4900300A4E /* pik.mp3 in Resources */,
 				9C4308C62C04729700E5E681 /* Base in Resources */,
 				9C4308C12C04729600E5E681 /* Base in Resources */,
 			);
